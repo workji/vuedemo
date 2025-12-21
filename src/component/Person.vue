@@ -9,6 +9,8 @@
 </template>
 
 <script lang="ts">
+    // 组件名跟文件名不一样时，需要在这里指定组件名
+    // 如果组件名跟文件名一样，可以省略这段<scrpit>不写
     export default {
         name: "Person",
     }
