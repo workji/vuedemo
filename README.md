@@ -1,2 +1,1 @@
-在VUE3中，也可以编写vue2的代码
-006.OptionsAPI 与 CompositionAPI
+响应式数据

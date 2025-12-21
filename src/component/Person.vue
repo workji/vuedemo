@@ -8,30 +8,23 @@
     </div>
 </template>
 
-<script lang="ts">
-    // 组件名跟文件名不一样时，需要在这里指定组件名
-    // 如果组件名跟文件名一样，可以省略这段<scrpit>不写
-    export default {
-        name: "Person",
-    }
-</script>
-
 <script lang="ts" setup>
+    import { ref } from "vue";
+
     // data()
-    // 注意：此时的name、age、tel数据都不是响应式数据
-    let name = "张三";
-    let age = 18;
+    let name = ref("张三");
+    let age = ref(18);
     let tel = "123-456-7890";
 
     // methods
     function changeName() {
         console.log("修改名字被点击了");
-        name = "李四";
+        name.value = "李四";
     }
 
     function changeAge() {
         console.log("年龄+1被点击了");
-        age += 1;
+        age.value += 1;
     }
 
     function showTel() {
