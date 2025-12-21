@@ -11,24 +11,29 @@
 <script lang="ts">
     export default {
         name: "Person",
-        data() {
-            return {
-                name: "张三",
-                age: 18,
-                tel: "123-456-7890"
-            };
-        },
-        methods: {
-            changeName() {
-                this.name = "李四";
-            },
-            changeAge() {
-                this.age += 1;
-            },
-            showTel() {
-                alert(`联系方式：${this.tel}`);
-            }
-        }
+    }
+</script>
+
+<script lang="ts" setup>
+    // data()
+    // 注意：此时的name、age、tel数据都不是响应式数据
+    let name = "张三";
+    let age = 18;
+    let tel = "123-456-7890";
+
+    // methods
+    function changeName() {
+        console.log("修改名字被点击了");
+        name = "李四";
+    }
+
+    function changeAge() {
+        console.log("年龄+1被点击了");
+        age += 1;
+    }
+
+    function showTel() {
+        alert(`联系方式：${tel}`);
     }
 </script>
 
