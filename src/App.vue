@@ -1,10 +1,16 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <h1>You did it!</h1>
+  <Person />
 </template>
+
+<script lang="ts">
+  import Person from "@/component/Person.vue";
+  export default {
+    name: "App",
+    components: {
+      Person,
+    },
+  };
+</script>
 
 <style scoped>
 
