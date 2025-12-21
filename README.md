@@ -1,2 +1,1 @@
-在VUE3中，也可以编写vue2的代码
-006.OptionsAPI 与 CompositionAPI
+setup 语法糖
