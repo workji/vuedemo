@@ -1,49 +1,55 @@
 <template>
   <div class="mt-4 mb-4">
-    <h1>情况三：监视【reactive】定义的【对象类型】数据</h1>
-    <h2>姓名: {{ person.name }}</h2>
-    <h2>年龄: {{ person.age }}</h2>
-    <button class="btn btn-outline-primary me-2" @click="changeName">更改名字</button>
-    <button class="btn btn-outline-primary me-2" @click="changeAge">更改年龄</button>
-    <button class="btn btn-outline-primary me-2" @click="changePerson">更改整个人</button>
+    <h1>情况四：监视【ref】或【reactive】定义的【对象类型】数据中的某个属性</h1>
+    <h2>姓名：{{ person.name }}</h2>
+    <h2>年龄：{{ person.age }}</h2>
+    <h2>汽车：{{ person.car.c1 }}、{{ person.car.c2 }}</h2>
+    <button class="btn btn-outline-primary me-2" @click="changeName">修改名字</button>
+    <button class="btn btn-outline-primary me-2" @click="changeAge">修改年龄</button>
+    <button class="btn btn-outline-primary me-2" @click="changeC1">修改第一台车</button>
+    <button class="btn btn-outline-primary me-2" @click="changeC2">修改第二台车</button>
+    <button class="btn btn-outline-primary me-2" @click="changeCar">修改整个车</button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, watch } from "vue";
-let person = reactive({
-  name: "张三",
-  age: 18,
-});
+import {reactive,watch} from 'vue'
 
-function changeName() {
-  person.name += "!";
-}
+  // 数据
+  let person = reactive({
+    name:'张三',
+    age:18,
+    car:{
+      c1:'奔驰',
+      c2:'宝马'
+    }
+  })
+  // 方法
+  function changeName(){
+    person.name += '~'
+  }
+  function changeAge(){
+    person.age += 1
+  }
+  function changeC1(){
+    person.car.c1 = '奥迪'
+  }
+  function changeC2(){
+    person.car.c2 = '大众'
+  }
+  function changeCar(){
+    person.car = {c1:'雅迪',c2:'爱玛'}
+  }
 
-function changeAge() {
-  person.age += 1;
-}
+  // 监视，情况四：监视响应式对象中的某个属性，且该属性是基本类型的，要写成函数式
+  /* watch(()=> person.name,(newValue,oldValue)=>{
+    console.log('person.name变化了',newValue,oldValue)
+  }) */
 
-function changePerson() {
-  // reactive定义的对象不可以整体替换，否则会失去响应式 特性
-  // person.value = {
-  //   name: "李四",
-  //   age: 20,
-  // };
-
-  Object.assign(person, {
-    name: "李四",
-    age: 20,
-  });
-}
-
-// 监视【reactive】定义的【对象类型】数据
-// 且默认是开启深度监视的, 无需额外配置
-watch(person, (newVal, oldVal) => {
-  console.log("person对象发生了变化");
-  console.log("旧值:", oldVal);
-  console.log("新值:", newVal);
-});
+  // 监视，情况四：监视响应式对象中的某个属性，且该属性是对象类型的，可以直接写，也能写函数，更推荐写函数
+  watch(()=>person.car,(newValue,oldValue)=>{
+    console.log('person.car变化了',newValue,oldValue)
+  },{deep:true})
 </script>
 
 <style scoped></style>
