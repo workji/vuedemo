@@ -1,2 +1,3 @@
 父传子写法
 第三种写法：接收+限制类型+指定默认值+限制必要性
+defineProps defineExports withDefaults这种在VUE3中可以直接使用不用import
