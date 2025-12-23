@@ -15,6 +15,7 @@
   // 用在普通DOM HTML标签上，获取的是`DOM`节点。
   function showLog() {
     console.log(title2.value.innerHTML);
+    name.value = '李四'
   }
 
   // 将组件中的数据交给外部使用
