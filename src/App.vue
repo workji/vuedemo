@@ -1,5 +1,5 @@
 <template>
-  <Person name="alex" age="10" :list="persons" />
+  <Person name="alex" age="10" />
 </template>
 
 <script lang="ts" setup>
