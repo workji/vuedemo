@@ -1,50 +1,44 @@
 <template>
   <div class="mt-4 mb-4">
-    <h1>情况五：监视上述的多个数据</h1>
-    <h2>姓名：{{ person.name }}</h2>
-    <h2>年龄：{{ person.age }}</h2>
-    <h2>汽车：{{ person.car.c1 }}、{{ person.car.c2 }}</h2>
-    <button class="btn btn-outline-primary me-2" @click="changeName">修改名字</button>
-    <button class="btn btn-outline-primary me-2" @click="changeAge">修改年龄</button>
-    <button class="btn btn-outline-primary me-2" @click="changeC1">修改第一台车</button>
-    <button class="btn btn-outline-primary me-2" @click="changeC2">修改第二台车</button>
-    <button class="btn btn-outline-primary me-2" @click="changeCar">修改整个车</button>
+    <h1>需求：水温达到50℃，或水位达到20cm，则联系服务器</h1>
+    <h2 id="demo">水温：{{temp}}</h2>
+    <h2>水位：{{height}}</h2>
+    <button class="btn btn-outline-primary me-2" @click="changePrice">水温+1</button>
+    <button class="btn btn-outline-primary me-2" @click="changeSum">水位+10</button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {reactive,watch} from 'vue'
+import { ref, watch, watchEffect } from 'vue';
+let temp = ref(20);
+let height = ref(0);
 
-  // 数据
-  let person = reactive({
-    name:'张三',
-    age:18,
-    car:{
-      c1:'奔驰',
-      c2:'宝马'
-    }
-  })
-  // 方法
-  function changeName(){
-    person.name += '~'
-  }
-  function changeAge(){
-    person.age += 1
-  }
-  function changeC1(){
-    person.car.c1 = '奥迪'
-  }
-  function changeC2(){
-    person.car.c2 = '大众'
-  }
-  function changeCar(){
-    person.car = {c1:'雅迪',c2:'爱玛'}
-  }
+function changePrice() {
+  temp.value += 10;
+}
 
-  // 监视，情况五：监视上述的多个数据
-  watch([()=>person.name,person.car],(newValue,oldValue)=>{
-    console.log('person.car变化了',newValue,oldValue)
-  },{deep:true})
+function changeSum() {
+  height.value += 10;
+}
+
+// 用watch实现，需要明确的指出要监视：temp、height
+// 这里的问题是，如果监视多个响应式数据，需要用数组写很多监视，比较麻烦
+// 
+watch([temp, height], ([newTemp, newHeight]) => {
+  // 室温达到50℃，或水位达到20cm，立刻联系服务器
+  if (newTemp >= 50 || newHeight >= 20) {
+    console.log('联系服务器');
+  }
+});
+
+// 用watchEffect实现，不需要明确指出要监视哪些数据, 会自动根据实现来监视
+// 而且会立即执行一次好像watch的immediate选项
+watchEffect(() => {
+  // 室温达到50℃，或水位达到20cm，立刻联系服务器
+  if (temp.value >= 50 || height.value >= 20) {
+    console.log('联系服务器--watchEffect');
+  }
+});
 </script>
 
 <style scoped></style>
