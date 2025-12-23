@@ -1,11 +1,17 @@
 <template>
-  <Person name="aaa" age="10" />
-  <Person name="bbb" age="16" />
-  <Person name="ccc" age="20" />
+  <Person name="alex" age="10" :list="persons" />
 </template>
 
 <script lang="ts" setup>
   import Person from "@/component/Person.vue";
+  import { reactive } from "vue";
+  import { type Persons } from "@/types";
+
+  let persons = reactive<Persons>([
+    { name: "李四", age: 20 },
+    { name: "王五", age: 22 },
+    { name: "赵六", age: 24 },
+  ]);
 </script>
 
 <style scoped>
