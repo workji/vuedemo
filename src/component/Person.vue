@@ -14,18 +14,18 @@
   import { ref, reactive } from 'vue';
   import { type PersonType, type Persons } from '@/types/index';
 
-  let person:PersonType = reactive({
+  let person = reactive<PersonType>({
     name: "张三",
     age: 18,
   })
 
-  let persons:Persons = reactive([
+  let persons = reactive<Persons>([
     { name: "李四", age: 20 },
     { name: "王五", age: 22 },
     { name: "赵六", age: 24 },
   ]);
 
-  let personList:Array<PersonType> = reactive([
+  let personList = reactive<Array<PersonType>>([
     { name: "李四", age: 20 },
     { name: "王五", age: 22 },
     { name: "赵六", age: 24 },
